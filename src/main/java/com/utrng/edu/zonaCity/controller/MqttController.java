@@ -17,6 +17,7 @@ public class MqttController {
     @PostMapping("/sendMessage")
     public ResponseEntity<String> publish(@RequestBody String mqttMessage) {
         try {
+//New cambio
             JsonObject jsonObject = new Gson().fromJson(mqttMessage, JsonObject.class);
             String message = jsonObject.get("message").getAsString();
             String topic = jsonObject.get("topic").getAsString();
