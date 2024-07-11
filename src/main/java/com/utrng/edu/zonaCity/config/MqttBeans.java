@@ -1,5 +1,6 @@
 package com.utrng.edu.zonaCity.config;
 
+import com.utrng.edu.zonaCity.model.MessageData;
 import com.utrng.edu.zonaCity.service.MyWebSocketHandler;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class MqttBeans {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[]{"tcp://192.168.1.68:1883"});
+        options.setServerURIs(new String[]{"tcp://127.0.0.1:1883"});
         options.setUserName("admin");
         String pass = "12345678";
         options.setPassword(pass.toCharArray());
@@ -65,11 +66,9 @@ public class MqttBeans {
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
                 String payload = message.getPayload().toString();
-                System.out.println("Received message from topic: " + topic);
-                System.out.println("Payload: " + payload);
 
                 try {
-                    webSocketHandler.sendMessageToAll("Received message from topic: " + topic + " - " + payload);
+                    webSocketHandler.sendMessageToAll( topic );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

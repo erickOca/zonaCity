@@ -34,11 +34,14 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         sessions.remove(session);
     }
 
-    public void sendMessageToAll(String message) throws IOException {
+    public void sendMessageToAll(String messageData) throws IOException {
         for (WebSocketSession session : sessions) {
             if (session.isOpen()) {
-                session.sendMessage(new TextMessage(message));
+                session.sendMessage(new TextMessage(messageData.toString())); // Opcional: convertir a JSON aquí si es necesario
+
             }
+            System.out.println(messageData.toString());
+
         }
     }
 }
