@@ -13,8 +13,8 @@ public class StopServiceImpl implements StopService{
     @Autowired
     private StopRepository stopRepository;
 
-    public List<Stop> getAllStops() {
-        return stopRepository.findAll();
+    public List<Stop> getAllStops(String trayecto) {
+        return stopRepository.findBytrayecto(trayecto);
     }
 }
 

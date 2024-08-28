@@ -1,6 +1,7 @@
 package com.utrng.edu.zonaCity.controller;
 
 import com.utrng.edu.zonaCity.model.Stop;
+import com.utrng.edu.zonaCity.repository.StopRepository;
 import com.utrng.edu.zonaCity.service.StopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,15 @@ public class StopController {
 
     @Autowired
     private StopService stopService;
+    @Autowired
+    private StopRepository repository;
 
-    @GetMapping
-    public List<Stop> getAllStops() {
-        return stopService.getAllStops();
+    @GetMapping("/city/{city}")
+    public List<Stop> getAllStops(String trayecto) {
+        return stopService.getAllStops(trayecto);
+    }
+    @GetMapping("/stop")
+    public List<Stop> getAll() {
+        return repository.findAll();
     }
 }

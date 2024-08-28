@@ -9,5 +9,4 @@ public class ZonaCityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZonaCityApplication.class, args);
 	}
-
 }
